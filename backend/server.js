@@ -11,8 +11,8 @@ import orderRouter from './routes/orderRoute.js';
 
 import { fileURLToPath } from 'url';
 
-const _filename = fileURLToPath(import.meta.url);
-const _dirname = path.dirname(_filename);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // App config
 const app = express();
@@ -24,9 +24,9 @@ connectCloudinary()
 app.use(express.json())
 app.use(cors())
 
-app.use(express.static('frontend/dist'))
-app.use(express.static('admin/dist'))
-app.use('/static', express.static('static'))
+app.use(express.static(path.join(__dirname, '../frontend/dist')))
+app.use(express.static(path.join(__dirname, '../admin/dist')))
+app.use('/static', express.static(path.join(__dirname, 'static')))
 
 // api endpoints
 app.use('/api/user',userRouter)
@@ -40,10 +40,10 @@ app.get('/',(req,res)=>{
 
 const adminRoutes = ['/add', '/list', '/orders']
 app.get(adminRoutes, (req, res) => {
-	res.sendFile(path.resolve(_dirname, '../admin/dist', 'index.html'))
+	res.sendFile(path.resolve(__dirname, '../admin/dist', 'index.html'))
 })
 app.get('/{*any}', (req, res) => {
-	res.sendFile(path.resolve(_dirname, '../frontend/dist', 'index.html'))
+	res.sendFile(path.resolve(__dirname, '../frontend/dist', 'index.html'))
 })
 
 app.listen(port,()=> console.log('Server started on PORT : '+ port))
