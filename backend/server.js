@@ -38,7 +38,7 @@ app.get('/',(req,res)=>{
     res.send("API Working")
 })
 
-const adminRoutes = ['/add', '/list', '/orders']
+const adminRoutes = ['/add', '/list', '/orders', '/admin']
 app.get(adminRoutes, (req, res) => {
 	res.sendFile(path.resolve(__dirname, '../admin/dist', 'index.html'))
 })
