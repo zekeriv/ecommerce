@@ -4,14 +4,13 @@
   "main": "backend/server.js",
   "scripts": {
     "start": "cd backend && npm start",
-    "build": "npm run build:backend && npm run build:frontend && npm run build:admin",
-    "build:backend": "cd backend && npm install --production",
-    "build:frontend": "cd frontend && npm install && npm run build",
-    "build:admin": "cd admin && npm install && npm run build",
-    "postbuild": "npm run copy-builds",
-    "copy-builds": "cp -r frontend/build backend/public/frontend && cp -r admin/build backend/public/admin"
+    "build": "npm run build:backend && npm run build:frontend && npm run build:admin && npm run copy-builds",
+    "build:backend": "echo 'Building backend...' && cd backend && npm install --production",
+    "build:frontend": "echo 'Building frontend...' && cd frontend && npm install && npm run build",
+    "build:admin": "echo 'Building admin...' && cd admin && npm install && npm run build",
+    "copy-builds": "echo 'Copying builds...' && mkdir -p backend/public && cp -r frontend/dist backend/public/frontend && cp -r admin/dist backend/public/admin && echo 'Copy completed' && ls -la backend/public/"
   },
   "engines": {
-    "node": ">=16.0.0"
+    "node": "22.x"
   }
 }
