@@ -1,40 +1,13 @@
-version: 1.0
+---
+version: 1
 runtime: nodejs22
 build:
   commands:
     build:
-      - echo "=== Starting Build Process ==="
-      - echo "Node version:"
-      - node --version
-      - echo "NPM version:"
-      - npm --version
-      - echo "Current directory contents:"
-      - ls -la
-      - echo "=== Step 1: Building Backend ==="
-      - cd backend && echo "Backend directory contents:" && ls -la
-      - npm install --production
-      - echo "Backend build completed"
-      - echo "=== Step 2: Building Frontend ==="
-      - cd ../frontend && echo "Frontend directory contents:" && ls -la
-      - npm install
       - npm run build
-      - echo "Frontend build completed"
-      - echo "=== Step 3: Building Admin ==="
-      - cd ../admin && echo "Admin directory contents:" && ls -la
-      - npm install
-      - npm run build
-      - echo "Admin build completed"
-      - echo "=== Step 4: Copying Build Files ==="
-      - cd ..
-      - mkdir -p backend/public
-      - cp -r frontend/build backend/public/frontend || cp -r frontend/dist backend/public/frontend
-      - cp -r admin/build backend/public/admin || cp -r admin/dist backend/public/admin
-      - echo "Build files copied"
-      - ls -la backend/public/
-      - echo "=== Build Complete ==="
 run:
   runtime-version: 22.14.0
-  command: cd backend && npm start
+  command: npm start
   network:
     port: 4000
   env:
