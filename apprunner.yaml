@@ -1,15 +1,18 @@
----
-version: 1
-runtime: nodejs22
+version: 1.0
+runtime: nodejs18
 build:
   commands:
     build:
+      - echo "Installing root dependencies..."
+      - npm install
+      - echo "Building application..."
       - npm run build
 run:
-  runtime-version: 22.14.0
+  runtime-version: 18
   command: npm start
   network:
     port: 4000
+    env: PORT
   env:
     - name: NODE_ENV
       value: production
