@@ -36,7 +36,7 @@ run:
   runtime-version: 22.14.0
   command: cd backend && npm start
   network:
-    port: 8080
+    port: 4000
   env:
     - name: NODE_ENV
       value: production
