@@ -10,42 +10,33 @@ build:
       - npm --version
       - echo "Current directory contents:"
       - ls -la
-      - echo ""
       - echo "=== Step 1: Building Backend ==="
       - cd backend && echo "Backend directory contents:" && ls -la
-      - npm install --production || (echo "Backend npm install failed" && exit 1)
-      - echo "Backend build completed successfully"
-      - echo ""
+      - npm install --production
+      - echo "Backend build completed"
       - echo "=== Step 2: Building Frontend ==="
       - cd ../frontend && echo "Frontend directory contents:" && ls -la
-      - npm install || (echo "Frontend npm install failed" && exit 1)
-      - npm run build || (echo "Frontend build failed" && exit 1)
-      - echo "Frontend build completed successfully"
-      - echo "Frontend build output:" && ls -la build/ 2>/dev/null || ls -la dist/ 2>/dev/null || echo "No build/dist directory found"
-      - echo ""
+      - npm install
+      - npm run build
+      - echo "Frontend build completed"
       - echo "=== Step 3: Building Admin ==="
       - cd ../admin && echo "Admin directory contents:" && ls -la
-      - npm install || (echo "Admin npm install failed" && exit 1)
-      - npm run build || (echo "Admin build failed" && exit 1)
-      - echo "Admin build completed successfully"
-      - echo "Admin build output:" && ls -la build/ 2>/dev/null || ls -la dist/ 2>/dev/null || echo "No build/dist directory found"
-      - echo ""
+      - npm install
+      - npm run build
+      - echo "Admin build completed"
       - echo "=== Step 4: Copying Build Files ==="
-      - cd .. && echo "Back to root directory"
-      - mkdir -p backend/public || (echo "Failed to create backend/public directory" && exit 1)
-      - echo "Created backend/public directory"
-      - echo "Copying frontend build files..."
-      - cp -r frontend/build backend/public/frontend 2>/dev/null || cp -r frontend/dist backend/public/frontend 2>/dev/null || (echo "Failed to copy frontend build - checking what exists:" && ls -la frontend/)
-      - echo "Copying admin build files..."
-      - cp -r admin/build backend/public/admin 2>/dev/null || cp -r admin/dist backend/public/admin 2>/dev/null || (echo "Failed to copy admin build - checking what exists:" && ls -la admin/)
-      - echo "Final backend/public structure:"
-      - ls -la backend/public/ 2>/dev/null || echo "No backend/public directory exists"
-      - echo "=== Build Process Complete ==="
+      - cd ..
+      - mkdir -p backend/public
+      - cp -r frontend/build backend/public/frontend || cp -r frontend/dist backend/public/frontend
+      - cp -r admin/build backend/public/admin || cp -r admin/dist backend/public/admin
+      - echo "Build files copied"
+      - ls -la backend/public/
+      - echo "=== Build Complete ==="
 run:
   runtime-version: 22.14.0
   command: cd backend && npm start
   network:
-    port: 4000
+    port: 8080
   env:
     - name: NODE_ENV
       value: production
