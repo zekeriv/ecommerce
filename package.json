@@ -1,16 +1,17 @@
 {
   "name": "ecommerce",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "backend/server.js",
   "scripts": {
-    "start": "npm run build && cd backend && npm run start",
+    "start": "cd backend && npm start",
     "build": "npm run build:backend && npm run build:frontend && npm run build:admin",
-    "build:backend": "cd backend && npm i",
-    "build:frontend": "cd frontend && npm i && npm run build",
-    "build:admin": "cd admin && npm i && npm run build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:backend": "cd backend && npm install --production",
+    "build:frontend": "cd frontend && npm install && npm run build",
+    "build:admin": "cd admin && npm install && npm run build",
+    "postbuild": "npm run copy-builds",
+    "copy-builds": "cp -r frontend/build backend/public/frontend && cp -r admin/build backend/public/admin"
   },
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  "engines": {
+    "node": ">=16.0.0"
+  }
 }

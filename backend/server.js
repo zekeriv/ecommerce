@@ -19,6 +19,8 @@ const __dirname = path.dirname(__filename);
 // App config
 const app = express();
 const port = process.env.PORT || 4000
+// added console log for port checking
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 connectDB()
 connectCloudinary()
 
