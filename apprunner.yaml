@@ -25,7 +25,6 @@ build:
       - ls -la backend/public/
       - echo "Build complete!"
 run:
-  runtime-version: 22
   command: cd backend && npm start
   network:
     port: 4000
